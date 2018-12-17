@@ -1,0 +1,565 @@
+Before asking a question, many common questions are already commonly asked and answered, and many answers exist in the sticky threads in this forum.
+
+Read this post before and any relevant guide before asking a question...
+
+If you ask a question that is answered by this FAQ, you'll likely be directed right back to this FAQ.
+
+Finally, this is NOT a troubleshooting thread. Please do not ask questions regarding your specific problem in this thread. Open a separate thread instead. Only if you have a question regarding the content of this FAQ, or have a an idea for an additional Q/A in this thread, reply here.
+
+
+Q. Where do I start?
+
+Read compatibility overview: http://www.tonymacx86.com/laptop-compatibility/106791-laptop-compatibility.html
+
+If you have UEFI capability, use the Clover Guide: http://www.tonymacx86.com/el-capita...de-booting-os-x-installer-laptops-clover.html
+
+You can use Clover without UEFI, and you may want to try that. There are still many advantages to using Clover, even with a computer that lacks UEFI. In fact, Clover is the only option with 10.11+.
+
+Also, you will find many of the pinned posts here useful: https://www.tonymacx86.com/forums/mojave-laptop-support.196/
+
+It is a good idea to collect complete hardware information before you even start.
+
+Use CPU-Z on Windows to find CPU (Core iX-xxx) and motherboard chipset (HMxx), and graphics capabilities. For a laptop, these details are important and affect critical installation procedures.
+
+Make sure your profile reflects your hardware details.
+
+Please provide complete details in your profile. Do not use the signature. You can use the signature for other systems (eg. a desktop) which you're not asking for assistance within the laptop forums.
+
+To edit your profile: https://www.tonymacx86.com/account/personal-details
+
+The profile has 3 fields which are visible with each post you make. The three fields should be filled out as follows:
+Mobo: manufacturer/model + bootloader(Clover/Chameleon/Chimera)
+CPU: detailed CPU model + motherboard chipset
+Graphics: all graphics devices + laptop internal screen resolution
+
+For example, typical Ivy laptop:
+Mobo: HP ProBook 4540s (Clover)
+CPU: i5-3320m/HM76
+Graphics: HD4000, 1366x768
+
+Note: When specifying your bootloader, if using Clover legacy, please be sure to specify "Clover legacy"). Specifying "Clover" will be assumed as "Clover UEFI"
+
+As mentioned above, if you have multiple systems, use the signature to place details for the second system. It is best to have your profile represent the primary system you are working with. So, for purposes here in the laptop forums, please make sure your profile indicates laptop details (desktop details can be easily placed in the signature).
+
+To edit your signature: https://www.tonymacx86.com/account/signature
+Please keep your signature details for each system within a single line.
+
+
+Q. Does Sierra 10.12.x work?
+
+There are some serious issues, some unsolved with Sierra.
+
+Refer to this pinned thread in the Sierra laptop forum: https://www.tonymacx86.com/threads/readme-common-some-unsolved-problems-in-10-12-sierra.202316/
+
+
+Q. Does High Sierra 10.13.x work?
+
+There are some new issues with High Sierra, some of them inherited from Sierra.
+
+Refer to this pinned thread in the High Sierra laptop forum: https://www.tonymacx86.com/threads/readme-common-problems-in-10-13-high-sierra.233582/
+
+
+Q. Does Mojave 10.14.x work?
+
+There are some new issues with Mojave, some of them inherited from High Sierra.
+
+Refer to this pinned thread in the Mojave laptop forum: https://www.tonymacx86.com/threads/readme-common-problems-changes-fixes-on-mojave.255823/
+
+
+Q. Can I still download El Capitan?
+
+Yes.
+Read here: https://support.apple.com/en-us/HT206886
+
+
+Q. Can I still download Sierra?
+
+Yes.
+Read here: https://support.apple.com/en-ca/HT208202
+
+
+Q. Can I still download High Sierra?
+
+Yes.
+Read here: https://support.apple.com/en-ng/HT208969
+
+
+Q. What if I don't have access to a Mac?
+
+In order to download OS X, you need access to the Mac App Store. Since the Mac App Store is only available from OS X, you need a Mac or working hack in order to access it.
+
+If you don't own a Mac, you have two choices:
+- borrow a Mac from someone you know in order to download OS X and prepare your USB.
+- purchase a Snow Leopard DVD from Apple. Install OS X on the target computer using the appropriate version of iBoot. Get it working with 10.6.8, with built-in Ethernet, in order to access the Mac App Store, download OS X, and build a USB installer.
+
+Borrowing a Mac is significantly easier than the Snow Leopard route, especially with modern hardware. Getting Snow Leopard to run on new hardware can be a challenge.
+
+
+Q. I tried Unibeast but my laptop just reboots when using it. How to fix?
+
+It is best to use Clover: http://www.tonymacx86.com/el-capita...de-booting-os-x-installer-laptops-clover.html
+
+
+Q. Is there a guide for my laptop?
+
+Check in the guide sub-forums. For example, laptop guides forum for Mojave:
+https://www.tonymacx86.com/forums/mojave-laptop-guides.197/
+
+Google is also useful in helping you find things.
+
+
+Q. How to install kexts?
+
+There are various kext installers: Kext Beast, Kext Wizard, Kext Utility. I don't recommend any of them.
+
+Note that once you install a kext with incorrect permissions or wrong location, you must remove it first:
+Code:
+sudo rm -Rf /Library/Extensions/KextToInstall.kext
+sudo rm -Rf /System/Library/Extensions/KextToInstall.kext
+It is easy to install kexts with Terminal:
+Code:
+sudo cp -R KextToInstall.kext /Library/Extensions
+Or with older OS X (10.10.x and prior):
+Code:
+sudo cp -R KextToInstall.kext /System/Library/Extensions
+And to rebuild cache:
+Code:
+sudo kextcache -i /
+Or with older OS X:
+Code:
+sudo touch /System/Library/Extensions && sudo kextcache -u /
+
+Q. Is it possible to preserve my existing Windows installation?
+
+Dual boot using Chimera/Chameleon:
+- will need to reinstall Windows if on the same drive
+- OS X requires GPT partitioning and if your Windows is installed in legacy mode, it is MBR
+- if Windows is installed UEFI, Chimera cannot boot it
+http://www.tonymacx86.com/multi-booting/96000-guide-dual-booting-mountain-lion-windows-8-a.html
+
+Dual boot using Clover:
+- you can install OS X provided the following conditions are met: EFI partitition >= 200MB, no MSR partition
+- if Windows is installed legacy, you'll have to re-install (or convert to GPT/UEFI) unless on a separate drive (GPT issue mentioned above)
+http://www.tonymacx86.com/multi-booting/133940-mavericks-windows-8-same-drive-without-erasing.html
+
+To determine whether Windows is installed legacy or UEFI, run MSINFO32.exe and check "BIOS Mode".
+
+Summary:
+- OS X requires GPT, so if your Windows install is legacy, must convert to UEFI/GPT
+- OS X doesn't like the MSR partition, so you have to remove it
+- OS X requires 200+mb EFI partition, so if yours is smaller, must increase the size
+
+
+Q. Is my laptop compatible?
+
+http://www.tonymacx86.com/laptop-compatibility/106791-laptop-compatibility.html
+
+
+Q. Do I need to set DVMT-prealloc to 64MB?
+
+Setting DVMT-prealloc is the preferred way to overcome the assumptions made by the graphics kexts.
+But you can also work around it by patching the framebuffer to match your BIOS setting (32mb on many Broadwell/Skylake/KabyLake).
+
+https://www.tonymacx86.com/threads/...lensize-patch-with-32mb-dvmt-prealloc.221506/
+
+Read here for methods that might help you change DVMT-prealloc if your BIOS does not provide an option for it:
+http://www.tonymacx86.com/yosemite-...5500-setting-dvmt-insydeh20-bios-laptops.html
+
+
+Q. Is Skylake supported?
+
+Yes,... but be aware of DVMT-prealloc requirements for integrated graphics.
+
+The default plists provided by the laptop Clover guide have patches for 32MB DVMT-prealloc.
+
+
+Q. Is Kaby Lake supported?
+
+Yes,... but be aware of DVMT-prealloc requirements for integrated graphics.
+
+The default plists provided by the laptop Clover guide have patches for 32MB DVMT-prealloc.
+
+
+Q. Is Intel Broadwell graphics supported?
+
+Yes,... but be aware of DVMT-prealloc requirements for integrated graphics.
+
+The default plists provided by the laptop Clover guide have patches for 32MB DVMT-prealloc.
+
+Some laptops (especially ASUS) support setting DVMT-prealloc directly from the BIOS user interface. Obviously, if your BIOS has such an option, there is no need to resort to UEFI shell or efivars in Linux. Just set the setting directly from BIOS.
+
+
+Q. Is Intel Skylake graphics supported?
+
+Early reports are that 10.11.4 has enhanced Skylake graphics drivers that eliminate some of the problems reported with earlier versions of 10.11.
+
+As with Broadwell (see question above), DVMT-prealloc must be set to 64mb (perhaps larger).
+
+Note also that there is some support for remapping PCI device-ids in FakePCIID. This support may be temporary as Apple continues to tweak the drivers. See here: https://github.com/RehabMan/OS-X-Fake-PCI-ID
+
+
+Q. Is Intel Kaby Lake graphics supported?
+
+As mentioned in the question above for Kaby Lake, the SKL kexts seem to work if the device is spoofed as Skylake properly.
+Newer versions of macOS also have native support (without spoofing) for Kaby Lake.
+
+Unsurprisingly, you still need to set DVMT-prealloc just as for Broadwell and Skylake.
+
+
+Q. Is Intel Coffee Lake graphics supported?
+
+Coffee Lake graphics and brightness controls are a work-in-progress.
+
+First native support in a normal macOS build is available in Mojave 10.14.
+
+
+Q. Is my NVMe SSD supported?
+
+
+The drivers Apple uses (IONVMeFamily.kext) for its own NVMe SSDs are not compatible with all PC NVMe SSDs.
+
+For 10.12.x and 10.11.x, the best way to deal with NVMe is using the class-code spoof along with HackrNVMeFamily. The technique can be used for installation and post-install. It is not as difficult as you might think. This link is provided from the patch-nvme github: https://www.tonymacx86.com/threads/...h-ionvmefamily-using-class-code-spoof.210316/
+
+With 10.13.x and later, NVMe with 512 byte LBA is better supported. But there are still compatibility issues with certain devices. For example, Intel NVMe seems to suffer from more compatibility issues than Samsung (Intel NVMe not recommended).
+
+Refer to the patch-nvme github for patches that may apply even with 10.13.x (and later) with your specific device: https://github.com/RehabMan/patch-nvme
+
+
+Q. Are QHD+/UHD laptop displays supported?
+
+4k laptop displays are supported, but will probably require WhateverGreen.kext+Lilu.kext (you probably have these already for other reasons) and kernel flag -cdfon (it is provided in all applicable laptop guide plists).
+
+
+Q. My keyboard and/or trackpad are not working. How to fix?
+
+Keyboard/trackpad: Depends on PS2 drivers. There is no native support for PS2 devices in OS X. Correct drivers depend on what the manufacturer of your trackpad is.
+
+There is good support for Synaptics here: https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller
+
+Newer laptops have trackpads connected via the I2C bus. There are kexts available: https://www.tonymacx86.com/threads/voodooi2c-help-and-support.243378/
+
+
+Q. My USB ports are not working; or internal bluetooth, camera, or other device is not working. How to fix?
+
+Especially since 10.11, there have been many changes to the USB driver stack. Most often, you will need to create a custom SSDT for USBInjectAll.kext to inject the ports that match your hardware, along with other fixes.
+
+See guides:
+https://www.tonymacx86.com/threads/guide-10-11-usb-changes-and-solutions.173616/
+https://www.tonymacx86.com/threads/guide-creating-a-custom-ssdt-for-usbinjectall-kext.211311/
+https://www.tonymacx86.com/threads/guide-usb-power-property-injection-for-sierra.222266/
+
+
+Q. Is my card reader supported?
+
+Most card readers are not supported. Some USB card readers can be made to work, but most are PCIe.
+
+If you have a supported JMicron card reader you may be able to use the kexts provided by JMicron on their website (older ProBook laptops use them, for example).
+
+There is an experimental driver under development for other PCIe card readers. See here: http://www.insanelymac.com/forum/topic/321080-sineteks-driver-for-realtek-rtsx-sdhc-card-readers/
+
+
+Q. I'm using Clover and my EFI partition is gone from my HDD. How to get it back?
+
+The EFI partition is a special partition in GPT partitioned disks. It is generally hidden in Disk Utility (and other Windows Disk Management) and not automatically mounted.
+
+In order to change its contents you must manually mount the EFI partition. There are many ways to mount EFI, but the easiest is from Disk Utility.
+
+To use Disk Utility to mount EFI, you need to enable the debug menu so you can "Show all Partitions". Read here: http://macs.about.com/od/usingyourmac/qt/Enable-Disk-Utilitys-Debug-Menu.htm
+
+I use a script that I wrote, mount_efi.sh. See here: https://github.com/RehabMan/hack-tools
+
+Installing and using mount_efi.sh are covered in post #2 of my Clover guide: http://www.tonymacx86.com/el-capita...de-booting-os-x-installer-laptops-clover.html
+
+
+Q. Can the EFI partition be mounted in safe mode?
+
+Not by default. It requires a slightly patched msdosfs.kext.
+
+Preparation: create msdosfs.kext with safe mode capability:
+Code:
+sudo mkdir /kexts
+sudo cp -RX /System/Library/Extensions/msdosfs.kext /kexts
+sudo /usr/libexec/PlistBuddy -c "Add :OSBundleRequired string" /kexts/msdosfs.kext/Contents/Info.plist
+sudo /usr/libexec/PlistBuddy -c "Set :OSBundleRequired \"Safe Boot\"" /kexts/msdosfs.kext/Contents/Info.plist
+Usage: load patched msdosfs.kext from safe mode when needed
+Code:
+sudo kextutil /kexts/msdosfs.kext
+Then proceed to mount EFI as you normally would (see previous question).
+
+
+Q. Audio is not working. How to fix?
+
+Three methods:
+
+AppleALC (recommended): https://github.com/acidanthera/AppleALC
+
+If you're new to AppleALC and Lilu plugins, refer to this thread: https://www.tonymacx86.com/threads/an-idiots-guide-to-lilu-and-its-plug-ins.260063/
+
+AppleHDA patcher: http://www.insanelymac.com/forum/files/file/496-applehda-patcher/
+
+VoodooHDA.kext: available in Multibeast or by google search
+
+Note: Many laptops use audio chips that have EAPD. If yours does (check your codec dump from Linux), you'll need CodecCommander: https://github.com/RehabMan/EAPD-Codec-Commander.
+
+Keep in mind some audio codecs have a special CodeCommander configuration. Refer to *.dsl in the CodecCommander github repository.
+
+
+Background information on patching AppleHDA:
+An AppleHDA patching guide: http://osxarena.com/2015/03/best-all-in-one-patch-applehda-guide/
+
+Note: When using AppleHDA injectors (so-called "dummy HDA"), you must rebuild cache in a very specific way when audio is lost. Also, such injectors must be installed to the system volume. They do not work when injected via EFI/Clover/kexts.
+
+Procedure:
+- boot without caches
+(if using RehabMan Clover fork, press spacebar for Clover menu, choose from resulting menu)
+(if not using RehabMan Clover, add -f to boot arguments from Clover options)
+- rebuild cache:
+Code:
+sudo touch /System/Library/Extensions && sudo kextcache -u /
+- boot normally
+
+You can also try VoodooHDA.kext (available in Multibeast)
+
+Note: With later macOS/OS X releases (not sure when the -i option was introduced) you can use a shortcut to rebuild caches:
+Code:
+sudo kextcache -i /
+
+Q. Ethernet is not working. How to fix?
+
+Ethernet: What Ethernet chipset do you have? Use DPCIManager->PCIList to find out. Install drivers (kexts) appropriate for your hardware.
+
+Common drivers (Mieze has created some high quality drivers, ported from Linux):
+
+Realtek GbE: http://www.insanelymac.com/forum/topic/287161-new-driver-for-realtek-rtl8111/
+
+Realtek FE:http://www.insanelymac.com/forum/topic/296190-driver-for-realteks-rtl810x-fast-ethernet-series/
+
+Atheros: http://www.insanelymac.com/forum/to...lcomm-atheros-ar816x-ar817x-and-killer-e220x/
+
+Intel: http://www.insanelymac.com/forum/topic/304235-intelmausiethernetkext-for-intel-onboard-lan/
+
+Broadcom: http://www.tonymacx86.com/network/155984-fakepciid-broadcom-bcm57xx-network-oob.html
+
+
+Q. WiFi/bluetooth is not working. How to fix?
+
+WiFi: depends on having compatible hardware. Recommendations:
+BCM943252HMB or BCM943252Z (depending on required form factor)
+BCM94360HMB or BCM943602BAED (depending on required form factor)
+BCM94350ZAE (not recommended, tends to have issues)
+
+Use AirportBrcmFixup.kext to enable this non-native WiFi hardware:
+https://github.com/acidanthera/AirportBrcmFixup
+
+Bluetooth: WiFi hardware mentioned above has a built-in bluetooth controller that connects to the USB bus.
+Must configure USB correctly (as per guides linked from this FAQ), and install required firmware loading kexts.
+Read here:
+https://github.com/RehabMan/OS-X-BrcmPatchRAM
+
+Also, you may find BT4LEContiunityFixup.kext useful in enabling handoff/continuity features:
+https://github.com/acidanthera/BT4LEContiunityFixup
+
+Be aware that some BIOS implement a so-called "whitelist". A whitelist prevents you from installing cards that the OEM has not deemed compatible. In many cases, you won't know whether your BIOS implements a whitelist until you attempt to replace the WiFi card.
+
+
+Use DPCIManager->PCI List to find out what you have. Compatible chipsets and the procedures for making them work are covered here: http://www.tonymacx86.com/network/104850-guide-airport-pcie-half-mini-v2.html
+
+Note: If the device is not listed in post #1 of the linked WiFi guide, it is not supported. Intel WiFi, RaLink WiFi, and Realtek PCIe WiFi are simply not supported and must be replaced with something compatible.
+
+Best choice: BCM94352HMB (or BCM94352Z if your laptop needs NGFF/M.2 2230). Also, the NGFF BCM94350ZAE is a possibility.
+
+Note: BCM94352HMB is easy to find and generally is $20-$30. For BCM94352Z, read here: http://www.tonymacx86.com/yosemite-laptop-support/160258-where-can-i-get-bcm94352z.html. It can be ordered from Dell (phone them) for approx. $20.
+
+Another choice (with 802.11ac) is the BCM94360HMB. It is a bit more native (device-id is supported natively), but also uses 3 smaller antenna connectors than are typical. So a bit more work to install. Same goes for (NGFF) BCM943602BAED if you need an M.2 2230 card.
+
+Be aware that some BIOS implement a so-called "whitelist". A whitelist prevents you from installing cards that the OEM has not deemed compatible. In many cases, you won't know whether your BIOS implements a whitelist until you attempt to replace the WiFi card.
+
+In some laptops, after installing supported WiFi hardware and enabling the driver as discussed above, the radio may refuse to power up. As a result, no networks are seen. Correct ACPI patches can sometimes help (eg. correct "OS Check Fix" patch). In other cases, even that is not enough (you will notice it affects both Windows, OS X and perhaps Linux). For half-mini PCIe, you can tape pin 20 to disable the "radio disable" function. For NGFF/M.2, tape pins 54 and 60.
+
+If your laptop implements a whitelist, you may be able to rebrand a supported card to the IDs that your BIOS supports. You can then use FakePCIID.kext to convince OS X of the true identity of the device.
+
+If you only need WiFi, AR9280 (AR5BHB92) is a good choice and is supported natively on versions prior to Mojave.
+
+Closely related to AR9280, is AR9285 (AR5B195). It is usually bundled with AR3011 bluetooth, which unfortunately, is a poor bluetooth implementation for OS X. It also lacks 5Ghz as compared with AR9280.
+
+AR9285/AR3011 requirements:
+- toledaARPT.kext for WiFi: http://www.tonymacx86.com/network/104850-guide-airport-pcie-half-mini-v2.html. Direct link for those unable to click a few times: https://github.com/toleda/wireless_half-mini/raw/master/Deprecated Files/airport_kext_enabler/toledaARPT.kext.zip
+- IOath3kfrmwr.kext for bluetooth: https://github.com/RehabMan/OS-X-Atheros-3k-Firmware
+
+For AR9285/AR9287, you can also use ProBookAtheros.kext. It will even work on Snow Leopard. It is available from the ProBook repo: https://github.com/RehabMan/HP-ProBook-4x30s-DSDT-Patch (direct link to zip: https://github.com/RehabMan/HP-ProBook-4x30s-DSDT-Patch/archive/master.zip)
+
+Stay away from 'Android File Transfer'. It will interfere with correct operation of USB and badly affects BrcmPatchRAM if it is installed. This post has some information that might be useful if you think you need to use it: http://www.tonymacx86.com/el-capita...tooth-bcm20702a0-problem-usb.html#post1200910
+
+And also avoid installing Logitech mouse drivers, which are not necessary and are known to interfere with the bluetooth controller and BrcmPatchRAM.
+
+Note: If you experience slow WiFi after a sleep/wake cycle, disable "Wake for network access" in SysPrefs->Energy Saver.
+
+
+Q. Can I use USB WiFi instead?
+
+There are USB WiFi devices compatible with OS X (look for devices with up-to-date OS X drivers), but they are not recommended.
+
+The user-interface is poor and they tend to cause instability, especially with sleep.
+
+Much better results with a compatible PCIe WiFi device (see question above).
+
+
+Q. Bluetooth is working, but the Bluetooth Assistant keeps popping up. How to fix?
+
+SysPrefs->Bluetooth->Advanced. Uncheck the boxes.
+
+
+Q. Brightness controls are not working. How to fix?
+
+https://www.tonymacx86.com/threads/...rol-using-applebacklightinjector-kext.218222/
+http://www.tonymacx86.com/el-capita...ching-dsdt-ssdt-laptop-backlight-control.html
+
+
+Q. Battery status is not working. How to fix?
+
+http://www.tonymacx86.com/yosemite-...de-how-patch-dsdt-working-battery-status.html
+
+
+Q. My battery doesn't last very long. How to fix?
+
+With a laptop, it is crucial that you implement power management correctly: https://www.tonymacx86.com/threads/guide-native-power-management-for-laptops.175801/
+
+And backlight control:
+https://www.tonymacx86.com/threads/...rol-using-applebacklightinjector-kext.218222/
+http://www.tonymacx86.com/el-capita...ching-dsdt-ssdt-laptop-backlight-control.html
+
+Also, if you have a dual-GPU setup, only the Intel graphics can be used so you will want to disable the unused graphics device in BIOS or via ACPI patches: http://www.tonymacx86.com/el-capita...bling-discrete-graphics-dual-gpu-laptops.html
+
+
+Q. Is there a way to make Radeon or Nvidia graphics work in my dual-GPU laptop?
+
+Not if the discrete card is not dedicated (eg. tied to the Intel device).
+
+The discrete graphics capability in a switched dual-GPU configuration is not supported with OS X on hacks. Best you can do is disable the discrete part with SSDT/DSDT patches. See the prior question.
+
+If your discrete device (AMD Radeon or Nvidia) is not routed through the Intel GPU, then it is considered dedicated. Some laptops have the internal display connected to the Intel GPU and the external HDMI/DP port connected to the discrete graphics device. It is rare, but in that case you would be able to get the device to work with the external display with proper kexts and correct configuration, much like a dual-GPU desktop setup.
+
+
+Q. Sleep is not working. How to fix?
+
+Power management is your first step: http://www.tonymacx86.com/yosemite-laptop-support/146870-guide-native-power-management-laptops.html, and here for 10.11+: http://www.tonymacx86.com/el-capita...01-guide-native-power-management-laptops.html
+
+And a correctly patched DSDT is also important: http://www.tonymacx86.com/el-capitan-laptop-support/152573-guide-patching-laptop-dsdt-ssdts.html
+
+Avoid USB WiFi. The drivers are poorly written and can cause instability, especially with sleep. Always test sleep without external devices plugged in.
+
+If the computer is not autosleeping as per settings in SysPrefs->Energy Saver, it could be that one or more "sleep assertions" are active. You can check with 'pmset -g assertions' in Terminal. If you enable certain options (such as internet sharing), it will prevent sleep on lid close and due to timeout. Same goes for apps playing audio in the background. Or certain networking apps.
+
+
+Q. How do I fix the "garbled" boot screen on Yosemite/El Capitan?
+
+Install WhateverGreen.kext + Lilu.kext. Enable legacy boot/CSM in BIOS.
+
+
+Q. HMDI-audio doesn't work. How to fix?
+
+Read the related guide: http://www.tonymacx86.com/el-capita...dmi-dp-audio-sandy-ivy-haswell-broadwell.html
+
+
+Q. Plugging an HDMI monitor results in crash or reboot. How to fix?
+
+If you're using AppleHDA, and have not implemented HDMI-audio, be aware that HDMI-audio can fix HDMI hotplug.
+
+See previous question above.
+
+
+Q. My DSDT has errors that I can't resolve. How to fix?
+
+Correct extraction and disassembly of DSDT (and other SSDTs) is critical.
+
+Refer to the guide: http://www.tonymacx86.com/el-capitan-laptop-support/152573-guide-patching-laptop-dsdt-ssdts.html
+
+
+Q. The Mac App Store isn't working. How to fix?
+
+First you must have built-in Ethernet at 'en0'. So, you must install drivers for your Ethernet device. It is also possible if you have built-in WiFi at 'en0'. USB devices cannot be made to look built-in.
+
+If your Ethernet (or WiFi, in the case of no Ethernet) is not at 'en0', try resetting the network interfaces. To do that, go into SysPrefs->Network and remove all interfaces, Apply, then remove /Library/Preferences/SystemConfiguration/NetworkInterfaces.plist. Reboot, then add all your network interfaces back, starting with Ethernet.
+
+If you have no supported Ethernet, and only USB WiFi, you can use NullEthernet: https://github.com/RehabMan/OS-X-Null-Ethernet
+
+
+Q. How to make iMessages/Message work?
+
+The comprehensive guide:
+http://www.tonymacx86.com/general-help/110471-how-fix-imessage.html
+
+A simpler guide:
+https://www.tonymacx86.com/threads/an-idiots-guide-to-imessage.196827/
+
+
+Q. How to do an "EC reset"?
+
+Resetting the EC (EmbeddedController) can help if it gets into a bad state. To reset the EC, all power must be cut.
+
+Shutdown, then disconnect all power sources including the battery. Hold the power button 30 sec. Reconnect power sources and turn on the computer.
+
+
+Q. What are typical "Problem Reporting" files?
+
+It is impossible to diagnose a problem without data that shows how your system is configured.
+
+Also, impossible to analyze any data that you might provide without a clear understanding of your hardware. So make sure your profile is filled as per the first question in this FAQ, "Q. Where do I start?".
+
+If you can't boot, a bare minimum is:
+- Boot verbose, attach photo
+- Attach EFI/Clover folder as ZIP (press F2 then F4 at main Clover screen just before collecting). Please eliminate 'themes' directory. Provide only EFI/Clover, not the entire EFI folder.
+
+Note: Some laptops swap Fn+Fx for Fx. For those laptops, press Fn+F2 then Fn+F4. If you're not sure, press F2, then F4, then Fn+F2, then Fn+F4. You can also verify by pressing F1 (or Fn+F1) to see which one brings the menu.
+
+If you can boot, but are having some other problem, describe the problem clearly and provide data...
+
+Download patchmatic: https://bitbucket.org/RehabMan/os-x-maciasl-patchmatic/downloads/RehabMan-patchmatic-2015-0107.zip
+Extract the 'patchmatic' binary from the ZIP. Copy it to /usr/bin, such that you have the binary at /usr/bin/patchmatic.
+
+In terminal,
+Code:
+if [ -d ~/Downloads/RehabMan ]; then rm -R ~/Downloads/RehabMan; fi
+mkdir ~/Downloads/RehabMan
+cd ~/Downloads/RehabMan
+patchmatic -extract
+Note: It is easier if you use copy/paste instead of typing the commands manually.
+
+Attach contents of Downloads/RehabMan directory as ZIP.
+
+Attach ioreg as ZIP: http://www.tonymacx86.com/audio/58368-guide-how-make-copy-ioreg.html. Please, use the IORegistryExplorer v2.1 attached to the post! DO NOT reply with an ioreg from any other version of IORegistryExplorer.app.
+
+Provide output (in Terminal):
+Code:
+kextstat|grep -y acpiplat
+kextstat|grep -y appleintelcpu
+kextstat|grep -y applelpc
+kextstat|grep -y applehda
+ls -l /System/Library/Extensions/AppleHDA.kext/Contents/Resources/*.zml*
+pmset -g assertions
+pmset -g
+system_profiler SPSerialATADataType|grep TRIM
+Attach EFI/Clover folder as ZIP (press F2 then F4 at main Clover screen just before collecting). Please eliminate 'themes' directory. Provide only EFI/Clover, not the entire EFI folder.
+
+Note: Some laptops swap Fn+Fx for Fx. For those laptops, press Fn+F2 then Fn+F4. If you're not sure, press F2, then F4, then Fn+F2, then Fn+F4. You can also verify by pressing F1 (or Fn+F1) to see which one brings the menu.
+
+For 10.11 and later, attach output of (in Terminal):
+Code:
+sudo kextcache -i /
+Older versions:
+Code:
+sudo touch /System/Library/Extensions && sudo kextcache -u /
+Compress all files as ZIP. Do not use external links. Attach all files using site attachments only.
+
+
+Q. Is there a script that will collect all Problem Reporting data automatically?
+
+Yes! (almost)
+
+User @black.dragon74 has created a script (gen_debug.sh) that automates most of the "Problem Reporting" tasks (as described in the previous question).
+
+The part it cannot do is pressing F2 and F4 for you at the main Clover screen.
+And of course, it only works for the case you can boot into your system. If you have a problem booting, you must obtain and collect the verbose boot photo manually (and EFI/Clover).
+
+Full details are here:
+https://www.tonymacx86.com/threads/tool-generate-proper-problem-reporting-files.235953/

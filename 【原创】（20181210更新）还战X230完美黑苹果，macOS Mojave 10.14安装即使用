@@ -1,0 +1,99 @@
+这个时间点真的好巧，巧到有点吓到自己，距离本人在论坛里最火的个人帖子《再战X230完美黑苹果，安装macOS High Sierra 10.13.X即使用(20180505最终更新)》刚好整整一年的时间。不是刻意却似刻意，那就随缘。
+这算是一个简单的教程帖，却也夹杂着一个中年男人黑果一年半来的絮絮叨叨，没想到这次玩黑果，会乐此不疲的坚持一年半以上时间，这期间，还认识了不少黑友，私下里还成为了不错的网友，特别认识了论坛里的好基友MAJ，都有强迫症的不停折腾，傻并乐呵着。要感谢的人有点多，但好像都没在论坛里混着，那心里的感激就放在心里吧，愿好友一切都好。
+黑苹果从使用上来说，只要处理得好，还是挺稳定的，其实害怕的就是大版本的更新，基本上大更新总会有新的问题出现，而解决新问题就成了黑苹果路上不停追逐的步伐，有点累人，但成功后的喜悦有TMD那一点点的让自己满意。一年半来，黑苹果的方法和技术真是不停的变化着，但一切都在朝集成化和简单化的方向行进。这一点，有黑苹果兴趣的朋友应该能感受到。而此次这个X230适配Mojave 10.14的EFI，基本是用上了最新的方法和驱动，所以完整度和构建上应该是比去年的10.13.X上黑得更畅快和流畅的。
+
+个人机器配置：
+CPU : Intel Core i7 - 3520M  （不再区分i5/i7,会主动变频）
+RAM : 16GB DDR3L 1600MHz SO-DIMM
+SSD : mSATA 128g
+Operating System : macOS Mojave 10.14
+WLAN Card : BCM94352HMB
+Display : 1366*768 IPS
+
+在本机功能上：除指纹、读卡器、VGA外，余都完美。包括AirDrop（隔空投送）、Handoff（接力）。
+
+系统截图：
+Mojave 10.14
+  
+
+About
+  
+
+AirDrop/Handoff
+  
+
+Others
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+教程:（本文的安装是指GPT格式安装，即UEFI启动，系统有EFI分区）
+一、启动U盘制作完成后，把U盘里EFI分区里的EFI文件夹删除，替换为我提供的EFI文件。(附TRANSMAC使用教程)
+教程：   TRANSMAC使用教程.docx (993.26 KB, 下载次数: 854) 
+二、开机启动时按F12从U盘启动，加载完成后，格式化要安装黑果系统的分区，格式选择APFS，安装MAC系统。
+三、正常安装完成后，启动到苹果系统，用CLOVER CONFIGURATOR加载EFI分区，把U盘里的EFI文件替换到系统EFI分区中。（这一步后可不用U盘引导开机）
+四、正常体验黑果，后续有需要再补图片。
+五、推荐教程强帖
+强帖一：《【原创】黑苹果教程2k屏X230 0基础吃上EI CAPITAN》
+强帖二：《【原创】x230改装＋99%完美黑苹果＋洗白系统解锁苹果功能【附工具和引导文件】》
+强帖三：《[Guide] Intel Framebuffer patching using WhateverGreen》 此帖意义重大，解决显卡相关问题
+
+同一类型两种EFI功能一样，如果卡进度条的，可以换另一种EFI试试看。
+
+20181203更新EFI：   X230-EFI-10.14-BCM94352HMB-VirtualSMC.zip (6.61 MB, 下载次数: 1948) 
+20181210更新EFI：   X230-EFI-10.14-BCM94352HMB-FakeSMC.zip (6.68 MB, 下载次数: 150) 
+1001 增加底座DP口适用，增加底座USB支持（因信息不全，只更新特定款）
+1003 增加最低亮度调整补丁，最低亮度更加合理
+1011 更新以支持开启HIDPI
+1129 更新以支持多声道切换，感谢589楼的兄弟okyaa
+1203 更新修正睡眠唤醒偶尔无声，更新合盖睡眠，外接显示器时可合盖睡眠，增加FN+4或者FN+F4进入睡眠
+
+20181203改屏EFI：   X230-EFI-10.14-BCM94352HMB-VirtualSMC（改屏适用）.zip (6.61 MB, 下载次数: 647) 
+20181210改屏EFI：   X230-EFI-10.14-BCM94352HMB-FakeSMC（改屏适用）.zip (6.68 MB, 下载次数: 74) 
+1001 增加加装mSATA板USB支持（视方案而定，有些改屏方案USB支持还不完全）
+1003 增加最低亮度调整补丁，最低亮度更加合理
+1011 更新以支持开启HIDPI
+1129 更新以支持多声道切换，感谢589楼的兄弟okyaa
+1203 更新修正睡眠唤醒偶尔无声，更新改屏可合盖睡眠，增加FN+4或者FN+F4进入睡眠
+开启HIDPI方法（推荐）：https://www.itpwd.com/283.html
+一键开启HIDPI工具：   一键开启HIDPI并注入EDID（含机型）.zip (261.83 KB, 下载次数: 445) 
+RDM配合HIDPI使用：   RDM-2.2.dmg.zip (93.93 KB, 下载次数: 326) 
+
+特别要注意的是，
+Mojave 10.14已删除了无线网卡AR9285的驱动，所以使用AR9285的朋友，操作方法是把附件中的驱动放到原来/System/Library/Extensions的IO80211Family.kext中的Plugins下，重建缓存后即可使用。
+MAC下重建缓存命令为在终端输入：sudo touch /System/Library/Extensions/ && sudo kextcache -u /
+或者安装KEXT UTILITIES程序，打开运行后即是重建缓存：   Kext_Utility.app_v2.6.6.zip (281.23 KB, 下载次数: 284) 
+AR9285驱动：   AirPortAtheros40.kext.zip (644.97 KB, 下载次数: 557) 
+
+Mojave 10.14镜像下载来自黑果小兵：https://pan.baidu.com/s/1b0dNTcBxLhWKbxmlbJMd0Q
+
+附BIOS设置分享：
+Item	Setting	Remarks
+Config/Network/Wake On Lan	Disabled	Not Supported.
+Config/USB UEFI BIOS Support	Enabled	Important for booting into USB Installer for OS X/ macOS.
+Config/USB 3.0 Mode	Enabled	Enables USB 3.0
+Config/Power/Intel SpeedStep Technology	Enabled	Enables Intel SpeedStep.
+Config/Power/Intel Rapid Start Technology	Disabled	This feature requires a hibernation partition (0xA0). Not supported on OS X / macOS.
+Config/Power/CPU Power Management	Enabled	Enables CPU Power Management.
+Config/Serial ATA (SATA)/SATA Controller Mode Option	AHCI	Enables AHCI which is better for SSDs and HDDs.
+Security/Predesktop Authentication	Optional	Fingerprint is not supported on macOS / OS X but you can still use it for waking your ThinkPad.
+Security/Security Chip	Disabled	Disable it if you have a modified UEFI Firmware.
+Security/Memory Protection/Execution Prevention	Enabled	This enables NX which is required for macOS / OS X installations.
+Security/Virtualization/Intel Virtualization Technology	Enabled	Delete boot argument named "dart=0" in config.plist if you set this as Disabled.
+Security/Virtualization/Intel VT-d Feature	Enabled	Delete boot argument named "dart=0" in config.plist if you set this as Disabled.
+Security/Secure Boot/Secure Boot	Disabled	Not supported by Clover.
+Startup/Boot Mode	Quick	This is optional.
+Startup/UEFI / Legacy Boot	UEFI Only	Reduces Confusion.
+Startup/UEFI / Legacy Boot/CSM Support	No	Setting this key as Yes requires a CSM Video Driver in Clover to provide proper video output on macOS / OS X. Only change this to Yes if you are dual booting with Windows 7 and installed CSMVideoDxe Driver in /EFI/CLOVER/drivers64UEFI/.
